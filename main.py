@@ -48,9 +48,14 @@ def recommend():
         sample_input = request.get_json(force=True)
         input = request_to_array(sample_input)
         input2= preprocess_inputs(input)
-        
-        results = get_recommendation([input2])
-        return jsonify(results.to_dict())
+        # try catch get recommendation
+        try:
+
+            results = get_recommendation([input2])
+            return jsonify(results.to_dict())
+        except:
+            return jsonify({"error": "Wrong Input to the model or format"}) 
+
 
 
 def request_to_array(input):
