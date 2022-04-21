@@ -56,10 +56,19 @@ def recommend():
 def request_to_array(input):
     #input = json.loads(input)
     arr = []
-    for key,values in input.items():
-        for j in values:
-            arr.append(j)
+    for key,values in dict(input).items():
+        if type(values) == list:
+            for j in values:
+                arr.append(j)
+        elif type(values) == str:
+            y=values.strip('][').split(',')
+            for j in y:    
+                if(j==""):
+                    continue
+                arr.append(j.strip('\''))
     return arr        
+
+        
        
 
 if __name__ == '__main__':
